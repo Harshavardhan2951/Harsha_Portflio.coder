@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form id="emailForm">
+        <input type="email" name="email" id="emailInput" required>
+        <input type="submit" value="Validate">
+    </form>
+    <div id="validationResult"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#emailForm').submit(function(event) {
+                event.preventDefault();
+
+                var email = $('#emailInput').val();
+
+                $.post('/validateEmail', { email: email }, function(data) {
+                    $('#validationResult').text('Email is valid: ' + data);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
